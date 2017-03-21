@@ -116,7 +116,7 @@ def depth_first_tree_search(problem):
     return tree_search(problem, Stack())
 
 def acota_rami(problem):
-    return graph_search(problem, mi_estructura())
+    return graph_search_sinClose(problem, mi_estructura())
 
 
 
@@ -136,6 +136,16 @@ def graph_search(problem, fringe):
             fringe.extend(node.expand(problem))
     return None
 
+def graph_search_sinClose(problem, fringe):
+    expand=0
+    fringe.append(Node(problem.initial))
+    while fringe:
+        node = fringe.pop()
+        if problem.goal_test(node.state):
+            return node
+        fringe.extend(node.expand(problem))
+        expand+=1
+    return None
 
 def breadth_first_graph_search(problem):
     """Search the shallowest nodes in the search tree first. [p 74]"""
