@@ -1,12 +1,11 @@
 # Search methods
 
 import search
-#Author:Jesús Sanchez López y Néstor Santana Hernández
 
-ab = search.GPSProblem('Z', 'L', search.romania)
+ab = search.GPSProblem('F', 'O', search.romania)
 
 
-#print search.breadth_first_graph_search(ab).path()
+print search.breadth_first_graph_search(ab).path()
 print search.depth_first_graph_search(ab).path()
 #print search.iterative_deepening_search(ab).path()
 #print search.depth_limited_search(ab).path()

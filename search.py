@@ -97,12 +97,15 @@ def tree_search(problem, fringe):
     """Search through the successors of a problem to find a goal.
     The argument fringe should be an empty queue.
     Don't worry about repeFIFOQueueated paths to a state. [Fig. 3.8]"""
+    expand = 0;
     fringe.append(Node(problem.initial))
     while fringe:
         node = fringe.pop()
         if problem.goal_test(node.state):
+            print "Nodos expandidos = %d" % (expand)
             return node
         fringe.extend(node.expand(problem),problem)
+        expand += 1;
     return None
 
 
@@ -126,26 +129,31 @@ def graph_search(problem, fringe):
     The argument fringe should be an empty queue.
     If two paths reach a state, only use the best one. [Fig. 3.18]"""
     closed = {}
-    fringe.append(Node(problem.initial))
-    while fringe:
-        node = fringe.pop()
-        if problem.goal_test(node.state):
-            return node
-        if node.state not in closed:
-            closed[node.state] = True
-            fringe.extend(node.expand(problem))
-    return None
-
-def graph_search_sinClose(problem, fringe):
     expand=0
     fringe.append(Node(problem.initial))
     while fringe:
         node = fringe.pop()
         if problem.goal_test(node.state):
+            print "Nodos expandidos = %d" % (expand)
+            return node
+        if node.state not in closed:
+            closed[node.state] = True
+            fringe.extend(node.expand(problem))
+            expand+=1
+    return None
+
+def graph_search_sinClose(problem, fringe):
+    expand = 0
+    fringe.append(Node(problem.initial))
+    while fringe:
+        node = fringe.pop()
+        if problem.goal_test(node.state):
+            print "Nodos expandidos = %d" % (expand)
             return node
         fringe.extend(node.expand(problem))
-        expand+=1
+        expand += 1
     return None
+
 
 def breadth_first_graph_search(problem):
     """Search the shallowest nodes in the search tree first. [p 74]"""
